@@ -1,22 +1,3 @@
-/* =====================================================================
- * MPLS SMAN 5 Tuban — Master Guard v1
- * ---------------------------------------------------------------------
- * SATU-SATUNYA handler submit form #attendance-form.
- * Menggantikan/menonaktifkan handler bentrok di:
- *   - main.js
- *   - firebase-sync.js
- *   - mpls-addons.js
- *   - mpls-gps-fix-addon.js
- *   - mpls-extra.js (submit interceptor; kamera/galeri tetap dipakai)
- *
- * Aturan:
- *   - Status "Hadir"        => WAJIB GPS valid, TIDAK perlu foto.
- *   - Status "Izin"|"Sakit" => WAJIB foto wajah, TIDAK perlu GPS.
- *   - 1 NISN hanya 1x per hari (anti-duplikat Firestore).
- *
- * Cara pakai (di index.html, paling akhir, SETELAH semua script lain):
- *   <script src="mpls-master-guard.js" defer></script>
- * ===================================================================*/
 (function () {
   "use strict";
 
