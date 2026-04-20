@@ -1,11 +1,3 @@
-/* ============================================================
- * mpls-ai-chat.js (v1)
- * - Floating button kanan-bawah buat buka AI chat
- * - Notif kecil "jangan lupa absen ya!!" (bisa di-dismiss)
- * - Modal full-screen AI chat: modern, aesthetic, glassmorphism
- * - Streaming response dari Lovable AI Gateway (Gemini)
- * - Standalone — tidak mengubah file lain
- * ============================================================ */
 (function () {
   'use strict';
 
