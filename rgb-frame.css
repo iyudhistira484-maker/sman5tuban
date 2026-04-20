@@ -1,0 +1,121 @@
+/* ============================================================
+   RGB ANIMATED FRAME — pinggiran card logo SMAN 5 Tuban
+   File ini DITAMBAHKAN, tidak menimpa styles.css
+   Target: parent card #logo-stage
+   ============================================================ */
+
+@property --mpls-rgb-angle {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
+
+@keyframes mplsRgbSpin {
+  0%   { --mpls-rgb-angle: 0deg; }
+  100% { --mpls-rgb-angle: 360deg; }
+}
+
+@keyframes mplsRgbHueShift {
+  0%   { filter: hue-rotate(0deg)   blur(14px) saturate(1.4); }
+  100% { filter: hue-rotate(360deg) blur(14px) saturate(1.4); }
+}
+
+/* Bungkus #logo-stage jadi card berbingkai RGB */
+.perspective-wrap #logo-stage {
+  position: relative;
+  border-radius: 2rem;
+  isolation: isolate;
+  background: rgba(255, 255, 255, .55);
+  backdrop-filter: blur(8px);
+  padding: 14px;
+  box-shadow:
+    0 30px 80px -20px rgba(37, 99, 235, .25),
+    0 0 0 1px rgba(255, 255, 255, .6) inset;
+}
+
+/* Border RGB bergerak (conic gradient yang berputar) */
+.perspective-wrap #logo-stage::before {
+  content: "";
+  position: absolute;
+  inset: -3px;
+  border-radius: inherit;
+  padding: 3px;
+  background: conic-gradient(
+    from var(--mpls-rgb-angle),
+    #ff0080, #ff8c00, #ffd400, #00ff88,
+    #00d4ff, #4b6bff, #b400ff, #ff00aa, #ff0080
+  );
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+          mask-composite: exclude;
+  animation: mplsRgbSpin 6s linear infinite;
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* Glow RGB di belakang card (efek halo neon) */
+.perspective-wrap #logo-stage::after {
+  content: "";
+  position: absolute;
+  inset: -10px;
+  border-radius: inherit;
+  background: conic-gradient(
+    from var(--mpls-rgb-angle),
+    #ff0080, #ff8c00, #ffd400, #00ff88,
+    #00d4ff, #4b6bff, #b400ff, #ff00aa, #ff0080
+  );
+  filter: blur(22px) saturate(1.5);
+  opacity: .55;
+  z-index: 0;
+  animation: mplsRgbSpin 6s linear infinite;
+  pointer-events: none;
+}
+
+/* Pastikan isi card di atas border & glow */
+.perspective-wrap #logo-stage > * {
+  position: relative;
+  z-index: 2;
+}
+
+/* Mode hemat gerak (accessibility) */
+@media (prefers-reduced-motion: reduce) {
+  .perspective-wrap #logo-stage::before,
+  .perspective-wrap #logo-stage::after {
+    animation-duration: 30s;
+  }
+}
+
+/* ============================================================
+   CLOUD SYNC UI — indikator kecil di form absensi
+   ============================================================ */
+.mpls-cloud-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: .45rem;
+  margin-top: .6rem;
+  padding: .35rem .7rem;
+  border-radius: 999px;
+  font-size: .72rem;
+  font-weight: 700;
+  letter-spacing: .04em;
+  background: #ecfdf5;
+  color: #047857;
+  border: 1px solid #a7f3d0;
+}
+.mpls-cloud-badge.is-offline { background:#fef2f2; color:#b91c1c; border-color:#fecaca; }
+.mpls-cloud-badge.is-checking { background:#eff6ff; color:#1d4ed8; border-color:#bfdbfe; }
+.mpls-cloud-badge i { font-size: .7rem; }
+
+.mpls-geo-warning {
+  margin-top: .8rem;
+  padding: .9rem 1rem;
+  border-radius: .9rem;
+  background: #fff7ed;
+  border: 1px solid #fed7aa;
+  color: #9a3412;
+  font-size: .85rem;
+  line-height: 1.45;
+}
+.mpls-geo-warning b { display:block; margin-bottom:.2rem; color:#7c2d12; }

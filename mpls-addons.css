@@ -1,0 +1,145 @@
+/* ============================================================
+   MPLS ADD-ONS STYLES (v2.0) — Halaman kamera fullscreen
+   ============================================================ */
+
+/* ---------- Camera fullscreen page ---------- */
+#addon-cam-page {
+  position: fixed; inset: 0; z-index: 99999;
+  display: none;
+  font-family: inherit;
+}
+#addon-cam-page.is-open { display: block; }
+
+#addon-cam-page .addon-cam-bg {
+  position: absolute; inset: 0;
+  background: radial-gradient(1200px 600px at 50% -10%, #1e293b, #020617 60%, #000 100%);
+}
+
+#addon-cam-page .addon-cam-inner {
+  position: relative;
+  display: flex; flex-direction: column;
+  height: 100%; width: 100%;
+  color: #f8fafc;
+  padding: 16px;
+  box-sizing: border-box;
+}
+
+#addon-cam-page .addon-cam-header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 4px 4px 12px;
+}
+#addon-cam-page .addon-cam-title {
+  font-weight: 700; font-size: 16px; letter-spacing: .3px;
+  display: flex; align-items: center; gap: 8px;
+}
+#addon-cam-page .addon-cam-cancel {
+  width: 38px; height: 38px; border-radius: 999px;
+  border: 1px solid rgba(255,255,255,.2);
+  background: rgba(255,255,255,.06);
+  color: #fff; font-size: 22px; line-height: 1;
+  cursor: pointer;
+}
+#addon-cam-page .addon-cam-cancel:hover { background: rgba(255,255,255,.12); }
+
+#addon-cam-page .addon-cam-stage {
+  position: relative;
+  flex: 1;
+  border-radius: 18px;
+  overflow: hidden;
+  background: #000;
+  box-shadow: 0 20px 60px rgba(0,0,0,.5), inset 0 0 0 1px rgba(255,255,255,.06);
+  display: flex; align-items: center; justify-content: center;
+}
+#addon-cam-page video,
+#addon-cam-page img#addon-cam-preview {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  transform: scaleX(-1); /* mirror */
+  background: #000;
+}
+#addon-cam-page img#addon-cam-preview { transform: none; }
+
+#addon-cam-page .addon-cam-frame {
+  position: absolute; inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 38% 50% at 50% 48%, transparent 60%, rgba(0,0,0,.55) 62%);
+}
+#addon-cam-page .addon-cam-frame::after {
+  content: "";
+  position: absolute;
+  left: 50%; top: 48%;
+  transform: translate(-50%, -50%);
+  width: 76%; max-width: 320px; aspect-ratio: 3/4;
+  border: 2px dashed rgba(56,189,248,.85);
+  border-radius: 50%;
+  box-shadow: 0 0 30px rgba(56,189,248,.4);
+  animation: addon-cam-pulse 2.2s ease-in-out infinite;
+}
+@keyframes addon-cam-pulse {
+  0%,100% { box-shadow: 0 0 22px rgba(56,189,248,.35); }
+  50%     { box-shadow: 0 0 44px rgba(56,189,248,.7); }
+}
+
+#addon-cam-page .addon-cam-count {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: clamp(72px, 22vw, 160px);
+  font-weight: 900;
+  color: #fff;
+  text-shadow: 0 6px 30px rgba(0,0,0,.6);
+  pointer-events: none;
+}
+#addon-cam-page .addon-cam-count.pulse { animation: addon-cam-num .9s ease-out; }
+@keyframes addon-cam-num {
+  0%   { transform: translate(-50%,-50%) scale(.4); opacity: 0; }
+  30%  { transform: translate(-50%,-50%) scale(1.15); opacity: 1; }
+  100% { transform: translate(-50%,-50%) scale(1); opacity: .9; }
+}
+
+#addon-cam-page .addon-cam-flash {
+  position: absolute; inset: 0;
+  background: #fff; opacity: 0; pointer-events: none;
+  transition: opacity .2s ease;
+}
+#addon-cam-page .addon-cam-flash.is-on { opacity: .9; }
+
+#addon-cam-page .addon-cam-hint {
+  margin: 12px 4px 8px;
+  font-size: 13.5px;
+  text-align: center;
+  color: #cbd5e1;
+  min-height: 36px;
+}
+
+#addon-cam-page .addon-cam-actions {
+  display: flex; gap: 10px;
+  padding: 4px 4px 12px;
+  justify-content: center; flex-wrap: wrap;
+}
+#addon-cam-page .addon-cam-btn-primary,
+#addon-cam-page .addon-cam-btn-secondary {
+  appearance: none; border: 0; cursor: pointer;
+  padding: 12px 18px; border-radius: 12px;
+  font-weight: 700; font-size: 14px;
+  display: inline-flex; align-items: center; gap: 8px;
+  min-width: 160px; justify-content: center;
+}
+#addon-cam-page .addon-cam-btn-primary {
+  background: linear-gradient(135deg,#22c55e,#15803d);
+  color: #fff;
+  box-shadow: 0 10px 24px rgba(34,197,94,.35);
+}
+#addon-cam-page .addon-cam-btn-primary:hover { filter: brightness(1.05); }
+#addon-cam-page .addon-cam-btn-secondary {
+  background: rgba(255,255,255,.1);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,.2);
+}
+#addon-cam-page .addon-cam-btn-secondary:hover { background: rgba(255,255,255,.18); }
+
+@media (min-width: 720px) {
+  #addon-cam-page .addon-cam-inner { padding: 28px; max-width: 720px; margin: 0 auto; }
+  #addon-cam-page .addon-cam-stage { border-radius: 22px; }
+}
