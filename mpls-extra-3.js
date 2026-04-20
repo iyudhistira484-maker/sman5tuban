@@ -1,20 +1,3 @@
-/* =====================================================================
- * MPLS SMAN 5 Tuban — Extra Add-on v3 (Permanent Face Verification Archive)
- * --------------------------------------------------------------------
- * Add-on tambahan, TIDAK mengubah mpls-extra.js / mpls-extra-2.js / main.js.
- *
- * Yang dilakukan:
- *  1. Hook ke runVerification() (mpls-extra.js) — TANPA memodifikasinya:
- *     setiap kali foto verifikasi wajah berhasil ditangkap, foto langsung
- *     di-save PERMANEN ke Firestore collection `face_verifications`.
- *  2. Tambah panel "📸 Arsip Verifikasi Wajah" di admin-dashboard,
- *     menampilkan SEMUA foto verifikasi (permanen, tidak tergantung absen).
- *  3. Auto cleanup: cache foto di localStorage (__mplsPendingPhotosV1)
- *     dihapus setelah berhasil upload ke Firestore.
- *
- * Cara pakai: tambahkan <script src="mpls-extra-3.js"></script>
- *             SETELAH <script src="mpls-extra.js"></script> di index.html.
- * ===================================================================*/
 (function () {
   "use strict";
 
