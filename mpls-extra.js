@@ -1,26 +1,3 @@
-/* =====================================================================
- * MPLS SMAN 5 Tuban — Extra Add-on v1.3
- * FIX v1.3:
- *   - Foto verifikasi DIJAMIN tersimpan via post-write update
- *     (tidak lagi tergantung monkey-patch CollectionReference.add)
- *   - Hapus Mendalam: hapus per-doc (parallel) + pesan rules jelas
- *
- * Strategi v1.2:
- *  - Intercept di tombol submit pakai 'click' CAPTURE phase
- *    → jalan SEBELUM submit event apapun (main.js & firebase-sync.js)
- *  - Saat status = Izin/Sakit → langsung buka kamera (sync, gesture aman)
- *  - Block submit asli sampai foto selesai
- *  - Setelah foto, re-dispatch submit dengan flag __mplsVerified
- *
- * Fitur:
- *  1. Anti-duplikat 1 NISN per hari (cek Firestore)
- *  2. Verifikasi kamera Izin/Sakit (countdown 3 detik, frame oval)
- *  3. Foto tersimpan base64 di Firestore
- *  4. Tab gugus 1-8 + export CSV/JSON per gugus
- *  5. Analitik (Hadir, Izin, Sakit) + grafik bar per gugus
- *  6. Galeri foto siswa Izin/Sakit (lightbox)
- *  7. Hapus Mendalam (ketik HAPUS SEMUA)
- * ===================================================================*/
 (function () {
   "use strict";
 
